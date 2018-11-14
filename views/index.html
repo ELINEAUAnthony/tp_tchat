@@ -1,0 +1,71 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mon premier tchat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" media="screen" href="./style.css" />
+</head>
+<body>
+    <H1>Tchat</H1>
+    <div id="pseudoInputDiv" class="pseudoInputDiv"><u>Entrez votre pseudo ici :</u>
+        <input type="text" id="pseudoInput" value=""/>
+        <button id="submitPseudoBtn">Validate</button> 
+    </div>
+    
+    <div id="messageInputDiv" class="messageInputDiv"><u>Entrez votre texte ici :</u>
+        <input type="text" id="messageInput"/>
+        <button id="submitMessageBtn">Send</button> 
+    </div>
+
+    <div id="messageDiv" class="messageDiv">
+        chat :
+        </div>
+
+    <h3>Utilisateur :</h3> 
+    <div id="listDiv">
+    </div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+    
+<script>
+    var socket = io();
+    var messageDiv = document.getElementById('messageDiv')
+    var submitMessageBtn = document.getElementById('submitMessageBtn')
+    const submitPseudoBtn = document.getElementById('submitPseudoBtn')
+    var messageInput = document.getElementById('messageInput')
+    var listDiv = document.getElementById('listDiv')
+    var listUser = []
+
+    submitMessageBtn.addEventListener('click', () => {
+        console.log(messageInput)
+        socket.emit('message', pseudoInput.value + ' : ' + messageInput.value)
+        messageInput.value = '';
+        
+    })
+
+    submitPseudoBtn.addEventListener('click', () => {
+        socket.emit('pseudoChange', pseudoInput.value)
+    })
+
+    socket.on('message', data => {
+        console.log('message received : ', data)
+        messageDiv.innerHTML += '<p>' + data + '</p>'
+    })
+
+    socket.on('list', (list) => {
+        listuser = list
+        listDiv.innerHTML = ''
+        list.forEach(element => {
+            listDiv.innerHTML += '<p>'+ element.pseudo + '</p>'
+        });
+    })
+</script>
+</html>
+
+    
+   
+    
+    

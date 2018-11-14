@@ -1,0 +1,25 @@
+*{
+    font-family: 'Lobster', cursive;
+    max-width: 50vw;
+}
+
+h1,h3{
+   float: left;
+   text-align: center;
+    font-size:2em;
+    text-decoration-line: underline;
+    width: 100%;
+}
+.messageDiv{
+    height:25vh;
+    border:solid 1px black;
+    margin-top:25px;
+    overflow:auto;
+}
+
+.pseudoInputDiv{
+    margin-top: 15px
+}
+.messageInputDiv{
+    margin-top: 15px
+}
